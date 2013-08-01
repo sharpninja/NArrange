@@ -1180,10 +1180,20 @@ namespace NArrange.CSharp
 							if (enclosingElement.ElementType == ElementType.ConditionDirective &&
 								attributes.Count > 0)
 							{
-								this.OnParseError("Cannot arrange files with preprocessor directives containing attributes unassociated to an element");
+							    // Allow turning off CS1998: This async method lacks 'await' operators and will run synchronously
+							    if (line.Trim().ToLower().Contains("pragma warning disable 1998")) continue;
+
+							    if (line.Trim().ToLower().Contains("pragma warning enable 1998"))
+							    {
+							        this.OnParseError("Cannot arrange files with preprocessor directives to turn CS1998 back on.");
+							    }
+							    else
+							    {
+							        this.OnParseError("Cannot arrange files with preprocessor directives containing attributes unassociated to an element");							            
+							    }
 							}
 
-							//
+						    //
 							// Are we processing a nested region or condition directive?
 							//
 							if (enclosingElementStack.Count > 0)
