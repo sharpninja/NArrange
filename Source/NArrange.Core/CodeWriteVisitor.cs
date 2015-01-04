@@ -209,7 +209,7 @@ namespace NArrange.Core
 
                 if (childIndex < element.Children.Count - 1)
                 {
-                    if (element.SeparatorType == GroupSeparatorType.Custom)
+                    if ((element.SeparatorType == GroupSeparatorType.Custom) || (element.SeparatorType == GroupSeparatorType.CustomWithoutChildNewLine))
                     {
                         WriteIndentedLine(element.CustomSeparator);
                     }
@@ -218,7 +218,7 @@ namespace NArrange.Core
                         WriteIndentedLine();
                     }
 
-                    if (childElement is GroupElement)
+                    if ((childElement is GroupElement) && ((element.SeparatorType == GroupSeparatorType.Custom) || (element.SeparatorType == GroupSeparatorType.NewLine)))
                     {
                         WriteIndentedLine();
                     }

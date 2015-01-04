@@ -324,7 +324,17 @@ namespace NArrange.Core
         /// <summary>
         /// Custom separator string.
         /// </summary>
-        Custom
+        Custom,
+
+        /// <summary>
+        /// New line separator without an additional new line between child groups.
+        /// </summary>
+        NewLineWithoutChildNewLine,
+
+        /// <summary>
+        /// Custom separator without an additional new line between child groups.
+        /// </summary>
+        CustomWithoutChildNewLine
     }
 
     /// <summary>
