@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>NArrange</id>
+    <version>0.3.2</version>
+    <authors>James Nies and NArrange contributors</authors>
+    <owners>James Nies and NArrange contributors</owners>
+    <licenseUrl>http://opensource.org/licenses/cpl1.0.php</licenseUrl>
+    <projectUrl>http://www.narrange.net/</projectUrl>
+    <iconUrl>http://www.narrange.net/Data/Sites/1/skins/narrange/favicon.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>NArrange is a .NET code beautifier that automatically organizes code members and elements within .NET classes.
+
+This package provides the Core and the CSharp and VisualBasic formatters. This allows it to be used as a library in other projects to do code formatting tasks.
+
+The package is built from a fork at (https://github.com/miratechcorp/NArrange).</description>
+    <summary>NArrange is a .NET code beautifier that automatically organizes code members and elements within .NET classes.</summary>
+    <releaseNotes>Added without child new line options for group separators.</releaseNotes>
+    <copyright>Copyright (c) 2007-2015 James Nies and NArrange contributors.</copyright>
+    <tags>arrange organize</tags>
+  </metadata>
+  <files>
+    <file src="Build\NArrange\bin\NArrange.Core.dll" target="lib" />
+    <file src="Build\NArrange\bin\NArrange.CSharp.dll" target="lib" />
+    <file src="Build\NArrange\bin\NArrange.VisualBasic.dll" target="lib" />
+  </files>
+</package>
