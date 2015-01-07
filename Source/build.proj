@@ -13,7 +13,7 @@
     <!-- Version -->
     <Major>0</Major>
     <Minor>3</Minor>
-    <Build>2</Build>
+    <Build>3</Build>
 
     <!-- StyleCop related stuff -->
     <StyleCopRoot>$(ProgramFiles)\MSBuild\Microsoft\StyleCop\v4.3</StyleCopRoot>

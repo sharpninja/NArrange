@@ -201,6 +201,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SortedInserter.cs" />
     <Compile Include="CodeWriter.cs" />
+    <Compile Include="StringArranger.cs" />
     <Compile Include="ZipUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
