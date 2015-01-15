@@ -469,7 +469,7 @@
             </summary>
             <returns>Namespace code element.</returns>
         </member>
-        <member name="M:NArrange.CSharp.CSharpParser.ParseNestedText(System.Char,System.Char,System.Boolean,System.Boolean)">
+        <member name="M:NArrange.CSharp.CSharpParser.ParseNestedText(System.Char,System.Char,System.Boolean,System.Boolean,System.Boolean)">
             <summary>
             Parses nested text.
             </summary>
@@ -477,6 +477,10 @@
             <param name="endChar">The end char.</param>
             <param name="beginExpected">Whether or not the begin char is expected.</param>
             <param name="trim">Whether or not the parsed text should be trimmed.</param>
+            <param name="skipBlocks">
+            Optional. Indicates that the blocks will be skipped during parsing. 
+            Blocks are often come from lambda expressions.
+            </param>
             <returns>The parsed text.</returns>
         </member>
         <member name="M:NArrange.CSharp.CSharpParser.ParseParameters">

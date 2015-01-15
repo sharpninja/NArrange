@@ -87,7 +87,7 @@ namespace NArrange.SourceTester
             if (copyrightAttributes.Length > 0)
             {
                 AssemblyCopyrightAttribute copyRight = copyrightAttributes[0] as AssemblyCopyrightAttribute;
-                Console.WriteLine(copyRight.Copyright.Replace("©", "(C)"));
+                Console.WriteLine(copyRight.Copyright.Replace("\u003f", "(C)"));
             }
             Console.WriteLine();
 

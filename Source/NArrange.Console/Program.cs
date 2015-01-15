@@ -1,4 +1,4 @@
-﻿#region Header
+#region Header
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Copyright (c) 2007-2008 James Nies and NArrange contributors.
@@ -75,7 +75,7 @@ namespace NArrange.ConsoleApplication
 			if (copyrightAttributes.Length > 0)
 			{
 				AssemblyCopyrightAttribute copyRight = copyrightAttributes[0] as AssemblyCopyrightAttribute;
-                copyrightText.AppendLine(copyRight.Copyright.Replace("©", "(C)"));
+                copyrightText.AppendLine(copyRight.Copyright.Replace("\u003f", "(C)"));
 				copyrightText.AppendLine("All rights reserved.");
 				copyrightText.AppendLine("http://www.NArrange.net");
 				copyrightText.AppendLine();

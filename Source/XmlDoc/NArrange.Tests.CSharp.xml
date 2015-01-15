@@ -594,6 +594,11 @@
             Tests parsing multiple fields with an initial value from a single statement.
             </summary>
         </member>
+        <member name="M:NArrange.Tests.CSharp.CSharpParserTests.ParseFieldLambdaExpressionTest">
+            <summary>
+            Tests parsing a field that instantiates with a lambda expression.
+            </summary>
+        </member>
         <member name="M:NArrange.Tests.CSharp.CSharpParserTests.ParseFieldMultiTest">
             <summary>
             Tests parsing multiple fields from a single statement.

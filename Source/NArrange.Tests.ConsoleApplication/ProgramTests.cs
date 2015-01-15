@@ -525,7 +525,7 @@ namespace NArrange.Tests.ConsoleApplication
             string copyrightText = Program.GetCopyrightText();
             Assert.IsNotNull(copyrightText, "Copyright text should not be null.");
             Assert.IsTrue(
-                copyrightText.Contains("(C) 2007"),
+                copyrightText.Contains("(C)"),
                 "Unexpected copyright text.");
         }
 

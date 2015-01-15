@@ -1,3 +1,5 @@
+using System;
+
 namespace NArrange.Tests.Core
 {
     using System.IO;
@@ -39,6 +41,13 @@ namespace NArrange.Tests.Core
                 int codePage;
                 if (int.TryParse(codePageString, out codePage))
                 {
+
+                    if (codePageString.Equals("1252", StringComparison.Ordinal))
+                    {
+                        // 1252 "WesternEuropean" means current System local encoding
+                        codePage = Encoding.Default.CodePage;
+                    }
+
                     Encoding encoding = FileUtilities.GetEncoding(file.FullName);
                     Assert.AreEqual(
                         codePage,

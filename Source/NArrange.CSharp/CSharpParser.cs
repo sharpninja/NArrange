@@ -1580,7 +1580,7 @@ namespace NArrange.CSharp
 		{
 			EatWhiteSpace(WhiteSpaceTypes.SpaceAndTab);
 
-			string initialValue = ParseNestedText(EmptyChar, CSharpSymbol.EndOfStatement, false, false);
+			string initialValue = ParseNestedText(EmptyChar, CSharpSymbol.EndOfStatement, false, false, true);
 
 			if (string.IsNullOrEmpty(initialValue))
 			{
@@ -1711,8 +1711,12 @@ namespace NArrange.CSharp
 		/// <param name="endChar">The end char.</param>
 		/// <param name="beginExpected">Whether or not the begin char is expected.</param>
 		/// <param name="trim">Whether or not the parsed text should be trimmed.</param>
+		/// <param name="skipBlocks">
+		/// Optional. Indicates that the blocks will be skipped during parsing. 
+		/// Blocks are often come from lambda expressions.
+		/// </param>
 		/// <returns>The parsed text.</returns>
-		private string ParseNestedText(char beginChar, char endChar, bool beginExpected, bool trim)
+		private string ParseNestedText(char beginChar, char endChar, bool beginExpected, bool trim, bool skipBlocks = false)
 		{
 			StringBuilder blockText = new StringBuilder(DefaultBlockLength);
 
@@ -1749,6 +1753,7 @@ namespace NArrange.CSharp
 				bool inBlockComment = false;
 				bool inVerbatimString = false;
 				bool escaped = false;
+			    int blockDepth = 0;
 
 				while (depth > 0)
 				{
@@ -1816,9 +1821,23 @@ namespace NArrange.CSharp
 						}
 					}
 
-					inComment = inBlockComment || inLineComment;
+                    inComment = inBlockComment || inLineComment;
+
+                    if (skipBlocks && !inComment && !inCharLiteral && !inString)
+                    {
+                        if (CurrentChar == CSharpSymbol.BeginBlock)
+                        {
+                            blockDepth++;
+                        }
+                        else if (CurrentChar == CSharpSymbol.EndBlock)
+                        {
+                            blockDepth--;
+                        }
+                    }
+
+					
 					if (beginChar != EmptyChar && CurrentChar == beginChar &&
-						!inCharLiteral && !inString && !inComment)
+						!inCharLiteral && !inString && !inComment && (blockDepth == 0))
 					{
 						blockText.Append(CurrentChar);
 						depth++;
@@ -1828,7 +1847,7 @@ namespace NArrange.CSharp
 						blockText.Append(CurrentChar);
 					}
 
-					if (nextChar == endChar && !inString && !inCharLiteral && !inComment)
+                    if (nextChar == endChar && !inString && !inCharLiteral && !inComment && (blockDepth == 0))
 					{
 						if (depth == 1)
 						{

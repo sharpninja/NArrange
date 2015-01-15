@@ -13,13 +13,14 @@ namespace NArrange.Tests.CSharp
 	/// <summary>
 	/// Test fixture for the CSharpParser class.
 	/// </summary>
-	[SetUpFixture]
+    [TestFixture]
 	public class CSharpParserTests
 	{
 		[SetUp]
 		public void StartTesting()
 		{
-			System.Diagnostics.Debugger.Launch();
+            //If your Visual Studio doesn't have the ability to debug test cases, uncomment this
+			//System.Diagnostics.Debugger.Launch();
 		}
 
 		#region Fields
@@ -310,7 +311,7 @@ namespace NArrange.Tests.CSharp
 				Assert.IsNotNull(attributeElement, "Element is not an AttributeElement.");
 				Assert.AreEqual("assembly", attributeElement.Target, "Unexpected attribute target.");
 				Assert.AreEqual("AssemblyCopyright", attributeElement.Name, "Unexpected attribute name.");
-				Assert.AreEqual("\"Copyright ©  2007\"", attributeElement.BodyText, "Unexpected attribute text.");
+				Assert.AreEqual("\"Copyright ? 2007\"", attributeElement.BodyText, "Unexpected attribute text.");
 				Assert.AreEqual(0, attributeElement.HeaderComments.Count, "An unexpected number of header comment lines were parsed.");
 
 				attributeElement = elements[9] as AttributeElement;
@@ -1805,6 +1806,31 @@ namespace NArrange.Tests.CSharp
 			Assert.AreEqual("int", fieldElement.Type, "Unexpected member type.");
 			Assert.AreEqual("1", fieldElement.InitialValue, "Unexpected initial value.");
 		}
+
+        /// <summary>
+        /// Tests parsing a field that instantiates with a lambda expression.
+        /// </summary>
+        [Test]
+        public void ParseFieldLambdaExpressionTest()
+        {
+            StringReader reader = new StringReader(
+                @"private Action<int> func = new Action<int>(i => {
+                    Console.WriteLine(i);   
+                });");
+
+            CSharpParser parser = new CSharpParser();
+            ReadOnlyCollection<ICodeElement> elements = parser.Parse(reader);
+
+            Assert.AreEqual(1, elements.Count, "An unexpected number of elements were parsed.");
+            FieldElement fieldElement = elements[0] as FieldElement;
+            Assert.IsNotNull(fieldElement, "Element is not a FieldElement.");
+            Assert.AreEqual("func", fieldElement.Name, "Unexpected name.");
+            Assert.AreEqual(CodeAccess.Private, fieldElement.Access, "Unexpected code access.");
+            Assert.AreEqual("Action<int>", fieldElement.Type, "Unexpected member type.");
+            Assert.AreEqual(@"new Action<int>(i => {
+                    Console.WriteLine(i);   
+                })", fieldElement.InitialValue, "Unexpected initial value.");
+        }
 
 		/// <summary>
 		/// Tests parsing multiple fields from a single statement.
