@@ -311,7 +311,7 @@ namespace NArrange.Tests.CSharp
 				Assert.IsNotNull(attributeElement, "Element is not an AttributeElement.");
 				Assert.AreEqual("assembly", attributeElement.Target, "Unexpected attribute target.");
 				Assert.AreEqual("AssemblyCopyright", attributeElement.Name, "Unexpected attribute name.");
-				Assert.AreEqual("\"Copyright ? 2007\"", attributeElement.BodyText, "Unexpected attribute text.");
+				Assert.AreEqual("\"Copyright \u003f 2007\"", attributeElement.BodyText, "Unexpected attribute text.");
 				Assert.AreEqual(0, attributeElement.HeaderComments.Count, "An unexpected number of header comment lines were parsed.");
 
 				attributeElement = elements[9] as AttributeElement;
