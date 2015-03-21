@@ -104,6 +104,11 @@
             "implicit" keyword.
             </summary>
         </member>
+        <member name="F:NArrange.CSharp.CSharpKeyword.In">
+            <summary>
+            "in" keyword.
+            </summary>
+        </member>
         <member name="F:NArrange.CSharp.CSharpKeyword.Interface">
             <summary>
             "interface" keyword.
@@ -127,6 +132,11 @@
         <member name="F:NArrange.CSharp.CSharpKeyword.Operator">
             <summary>
             "operator" keyword.
+            </summary>
+        </member>
+        <member name="F:NArrange.CSharp.CSharpKeyword.Out">
+            <summary>
+            "out" keyword.
             </summary>
         </member>
         <member name="F:NArrange.CSharp.CSharpKeyword.Override">
@@ -478,7 +488,7 @@
             <param name="beginExpected">Whether or not the begin char is expected.</param>
             <param name="trim">Whether or not the parsed text should be trimmed.</param>
             <param name="skipBlocks">
-            Optional. Indicates that the blocks will be skipped during parsing. 
+            Optional. Indicates that the blocks will be skipped during parsing.
             Blocks are often come from lambda expressions.
             </param>
             <returns>The parsed text.</returns>

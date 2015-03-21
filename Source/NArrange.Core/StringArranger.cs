@@ -73,107 +73,101 @@
         /// <returns>True if successful, otherwise false.</returns>
         public bool Arrange(string inputFile, string inputFileText, out string outputFileText)
         {
-            bool success = true;
             outputFileText = null;
 
-            success = Initialize();
+            if (!Initialize())
+                return false;
 
-            if (success)
+            bool isProject = _projectManager.IsProject(inputFile);
+            bool isSolution = !isProject && ProjectManager.IsSolution(inputFile);
+            bool isDirectory = !isProject && !isSolution && string.IsNullOrEmpty(Path.GetExtension(inputFile)) && Directory.Exists(inputFile);
+
+            if (isProject || isSolution || isDirectory)
+                return false;
+
+            if (File.Exists(String.Concat(inputFile, ".cs")))
             {
-                bool isProject = _projectManager.IsProject(inputFile);
-                bool isSolution = !isProject && ProjectManager.IsSolution(inputFile);
-                bool isDirectory = !isProject && !isSolution && string.IsNullOrEmpty(Path.GetExtension(inputFile)) && Directory.Exists(inputFile);
+                inputFile = String.Concat(inputFile, ".cs");
+            }
+            else if (File.Exists(String.Concat(inputFile, ".vb")))
+            {
+                inputFile = String.Concat(inputFile, ".vb");
+            }
 
-                if (isProject || isSolution || isDirectory)
-                {
-                    return false;
-                }
-                if (File.Exists(String.Concat(inputFile, ".cs")))
-                {
-                    inputFile = String.Concat(inputFile, ".cs");
-                }
-                else if (File.Exists(String.Concat(inputFile, ".vb")))
-                {
-                    inputFile = String.Concat(inputFile, ".vb");
-                }
+            bool canParse = _projectManager.CanParse(inputFile);
+            if (!canParse)
+            {
+                LogMessage(
+                    LogLevel.Warning,
+                    "No assembly is registered to handle file {0}.  Please update the configuration or select a valid file.",
+                    inputFile);
 
-                bool canParse = _projectManager.CanParse(inputFile);
-                if (!canParse)
+                return false;
+            }
+
+            ReadOnlyCollection<ICodeElement> elements = null;
+
+            Encoding encoding = _encoding;
+            if (encoding == null)
+                encoding = FileUtilities.GetEncoding(inputFile);
+
+            try
+            {
+                elements = _projectManager.ParseElements(inputFile, inputFileText);
+                LogMessage(LogLevel.Trace, "Parsed {0}", inputFile);
+            }
+            catch (ParseException parseException)
+            {
+                LogMessage(
+                    LogLevel.Warning,
+                    "Unable to parse file {0}: {1}",
+                    inputFile,
+                    parseException.Message);
+
+                return false;
+            }
+
+            if (elements != null)
+            {
+                try
+                {
+                    if (_codeArranger == null)
+                        _codeArranger = new CodeArranger(_configuration);
+
+                    elements = _codeArranger.Arrange(elements);
+                }
+                catch (InvalidOperationException invalidEx)
                 {
                     LogMessage(
                         LogLevel.Warning,
-                        "No assembly is registered to handle file {0}.  Please update the configuration or select a valid file.",
-                        inputFile);
-                    success = false;
-                }
+                        "Unable to arrange file {0}: {1}",
+                       inputFile,
+                       invalidEx.ToString());
 
-                if (success)
-                {
-                    ReadOnlyCollection<ICodeElement> elements = null;
-
-                    Encoding encoding = _encoding;
-                    if (encoding == null)
-                    {
-                        encoding = FileUtilities.GetEncoding(inputFile);
-                    }
-                    try
-                    {
-                        elements = _projectManager.ParseElements(inputFile, inputFileText);
-                        LogMessage(LogLevel.Trace, "Parsed {0}", inputFile);
-                    }
-                    catch (ParseException parseException)
-                    {
-                        LogMessage(
-                            LogLevel.Warning,
-                            "Unable to parse file {0}: {1}",
-                            inputFile,
-                            parseException.Message);
-                    }
-                    if (elements != null)
-                    {
-                        try
-                        {
-                            if (_codeArranger == null)
-                            {
-                                _codeArranger = new CodeArranger(_configuration);
-                            }
-
-                            elements = _codeArranger.Arrange(elements);
-                        }
-                        catch (InvalidOperationException invalidEx)
-                        {
-                            LogMessage(
-                                LogLevel.Warning,
-                                "Unable to arrange file {0}: {1}",
-                               inputFile,
-                               invalidEx.ToString());
-
-                            elements = null;
-                        }
-                    }
-                    if (elements != null)
-                    {
-                        ICodeElementWriter codeWriter = _projectManager.GetSourceHandler(inputFile).CodeWriter;
-                        codeWriter.Configuration = _configuration;
-
-                        StringWriter writer = new StringWriter(CultureInfo.InvariantCulture);
-                        try
-                        {
-                            codeWriter.Write(elements, writer);
-                        }
-                        catch (Exception ex)
-                        {
-                            LogMessage(LogLevel.Error, ex.ToString());
-                            throw;
-                        }
-
-                        outputFileText = writer.ToString();
-                    }
-
+                    return false;
                 }
             }
 
-            return success;
+            if (elements != null)
+            {
+                ICodeElementWriter codeWriter = _projectManager.GetSourceHandler(inputFile).CodeWriter;
+                codeWriter.Configuration = _configuration;
+
+                StringWriter writer = new StringWriter(CultureInfo.InvariantCulture);
+                try
+                {
+                    codeWriter.Write(elements, writer);
+                }
+                catch (Exception ex)
+                {
+                    LogMessage(LogLevel.Error, ex.ToString());
+                    return false;
+                }
+
+                outputFileText = writer.ToString();
+            }
+
+            return true;
         }
 
         /// <summary>
