@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>NArrange</id>
-    <version>0.3.4</version>
+    <version>0.3.5</version>
     <authors>James Nies and NArrange contributors</authors>
     <owners>James Nies and NArrange contributors</owners>
     <licenseUrl>http://opensource.org/licenses/cpl1.0.php</licenseUrl>
@@ -15,7 +15,7 @@ This package provides the Core and the CSharp and VisualBasic formatters. This a
 
 The package is built from a fork at (https://github.com/miratechcorp/NArrange).</description>
     <summary>NArrange is a .NET code beautifier that automatically organizes code members and elements within .NET classes.</summary>
-    <releaseNotes>Fix CSharp Parser bug that fails at field initializations with lambda expressions.</releaseNotes>
+    <releaseNotes>Fixed a bug in the StringArranger which could lead to the file content being replaced with an empty string.</releaseNotes>
     <copyright>Copyright (c) 2007-2015 James Nies and NArrange contributors.</copyright>
     <tags>arrange organize</tags>
   </metadata>
