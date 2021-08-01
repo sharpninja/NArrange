@@ -1,21 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5053E13A-3D0C-444F-9B39-EFE32076FB50}</ProjectGuid>
+    <TargetFramework>net5.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NArrange.Tests.Core</RootNamespace>
-    <AssemblyName>NArrange.Tests.Core</AssemblyName>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -31,41 +17,13 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseVSHostingProcess>true</UseVSHostingProcess>
-    <DocumentationFile>..\XmlDoc\NArrange.Tests.Core.xml</DocumentationFile>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <UseVSHostingProcess>true</UseVSHostingProcess>
-    <DocumentationFile>..\XmlDoc\NArrange.Tests.Core.xml</DocumentationFile>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DocumentationFile>..\XmlDoc\NArrange.Tests.Core.xml</DocumentationFile>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
     <CodeAnalysisLogFile>bin\Debug\NArrange.Tests.Core.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
-    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
-    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
-    <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
     <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
@@ -74,15 +32,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
     <DocumentationFile>..\XmlDoc\NArrange.Tests.Core.xml</DocumentationFile>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
     <CodeAnalysisLogFile>bin\Release\NArrange.Tests.Core.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
-    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
-    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
-    <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
     <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
@@ -94,94 +45,20 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\NUnit\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="BackupUtilitiesTests.cs" />
-    <Compile Include="CodeElements\AttributedElementTests.cs" />
-    <Compile Include="CodeElements\CodeElementTests.cs" />
-    <Compile Include="CodeElements\CommentedElementTests.cs" />
-    <Compile Include="CodeElements\CommentLineElementTests.cs" />
-    <Compile Include="CodeElements\ConstructorElementTests.cs" />
-    <Compile Include="CodeElements\AttributeElementTests.cs" />
-    <Compile Include="CodeElements\CommentElementTests.cs" />
-    <Compile Include="CodeElements\ConditionDirectiveElementTests.cs" />
-    <Compile Include="CodeElements\GroupElementTests.cs" />
-    <Compile Include="CodeElements\MethodElementTests.cs" />
-    <Compile Include="CodeElements\FieldElementTests.cs" />
-    <Compile Include="CodeElements\RegionElementTests.cs" />
-    <Compile Include="CodeElements\EventElementTests.cs" />
-    <Compile Include="CodeElements\PropertyElementTests.cs" />
-    <Compile Include="CodeElements\TypeElementTests.cs" />
-    <Compile Include="CodeElements\TypeParameterTests.cs" />
-    <Compile Include="CodeElements\UsingElementTests.cs" />
-    <Compile Include="CodeElements\NamespaceElementTests.cs" />
-    <Compile Include="ConditionExpressionEvaluatorTests.cs" />
-    <Compile Include="Configuration\BinaryOperatorExpressionTests.cs" />
-    <Compile Include="Configuration\CodeConfigurationTests.cs" />
-    <Compile Include="Configuration\UsingConfigurationTests.cs" />
-    <Compile Include="Configuration\FormattingConfigurationTests.cs" />
-    <Compile Include="Configuration\LineSpacingConfigurationTests.cs" />
-    <Compile Include="Configuration\ProjectHandlerConfigurationTests.cs" />
-    <Compile Include="Configuration\EncodingConfigurationTests.cs" />
-    <Compile Include="Configuration\ElementReferenceConfigurationTests.cs" />
-    <Compile Include="Configuration\FileAttributeExpressionTests.cs" />
-    <Compile Include="Configuration\RegionFormatConfigurationTests.cs" />
-    <Compile Include="Configuration\UnaryOperatorExpressionTests.cs" />
-    <Compile Include="Configuration\SourceHandlerConfigurationTests.cs" />
-    <Compile Include="Configuration\InterfaceReferenceTests.cs" />
-    <Compile Include="Configuration\TabConfigurationTests.cs" />
-    <Compile Include="Configuration\ExtensionConfigurationTests.cs" />
-    <Compile Include="Configuration\ElementConfigurationTests.cs" />
-    <Compile Include="Configuration\ConditionExpressionParserTests.cs" />
-    <Compile Include="Configuration\RegionConfigurationTests.cs" />
-    <Compile Include="Configuration\SortByTests.cs" />
-    <Compile Include="Configuration\FilterByTests.cs" />
-    <Compile Include="Configuration\GroupByTests.cs" />
-    <Compile Include="MonoDevelopSolutionParserTests.cs" />
-    <Compile Include="MonoDevelopProjectParserTests.cs" />
-    <Compile Include="EnumUtilitiesTests.cs" />
-    <Compile Include="FileUtilitiesTests.cs" />
-    <Compile Include="ISourceCodeTestFile.cs" />
-    <Compile Include="MSBuildProjectParserTests.cs" />
-    <Compile Include="MSBuildSolutionParserTests.cs" />
-    <Compile Include="ProjectHandlerTests.cs" />
-    <Compile Include="ProjectManagerTests.cs" />
-    <Compile Include="GroupedInserterTests.cs" />
-    <Compile Include="CodeElements\ElementUtilitiesTests.cs" />
-    <Compile Include="ElementFilterTests.cs" />
-    <Compile Include="ChainElementArrangerTests.cs" />
-    <Compile Include="ElementArrangerFactoryTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegionArrangerTests.cs" />
-    <Compile Include="SolutionParserTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="SortedInserterTests.cs" />
-    <Compile Include="TestLogger.cs" />
-    <Compile Include="TestUtilities.cs" />
-    <Compile Include="CodeWriterTests.cs" />
-    <Compile Include="WriteArrangedTests.cs" />
-    <Compile Include="ZipUtilitiesTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NArrange.Core\NArrange.Core.csproj">
-      <Project>{CD74EA33-223D-4CD9-9028-AADD4E929613}</Project>
-      <Name>NArrange.Core</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\NArrange.Core\NArrange.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="TestSolution.sln" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="TestSolution.mds" />
-    <None Include="TestConfigurations\ImportRegionConfig.xml">
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\NArrange.Core\DefaultConfig.v026.xml">
@@ -245,12 +122,4 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

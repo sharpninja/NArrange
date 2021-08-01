@@ -270,7 +270,7 @@ namespace NArrange.Core
 		/// </summary>
 		/// <param name="elements">The elements.</param>
 		/// <returns>Collection of arranged elements.</returns>
-		private ReadOnlyCollection<ICodeElement> ArrangeElements(ReadOnlyCollection<ICodeElement> elements)
+		public ReadOnlyCollection<ICodeElement> ArrangeElements(ReadOnlyCollection<ICodeElement> elements)
 		{
 			if (_codeArranger == null)
 			{
@@ -404,6 +404,53 @@ namespace NArrange.Core
 			}
 		}
 
+		public string ArrangeSourceFile(ReadOnlyCollection<ICodeElement> elements, ICodeElementWriter codeWriter)
+		{
+			string inputFileText = null;
+
+			if (elements != null)
+			{
+				try
+				{
+					elements = ArrangeElements(elements);
+				}
+				catch (InvalidOperationException invalidEx)
+				{
+					LogMessage(
+						LogLevel.Warning,
+						"Unable to arrange file {0}: {1}",
+					   "unnamed",
+					   invalidEx.ToString());
+
+					elements = null;
+				}
+			}
+
+			string outputFileText = null;
+
+            if (elements == null)
+            {
+                return outputFileText;
+            }
+
+            codeWriter.Configuration = _configuration;
+
+            StringWriter writer = new StringWriter(CultureInfo.InvariantCulture);
+            try
+            {
+                codeWriter.Write(elements, writer);
+            }
+            catch (Exception ex)
+            {
+                LogMessage(LogLevel.Error, ex.ToString());
+                throw;
+            }
+
+            outputFileText = writer.ToString();
+
+            return outputFileText;
+        }
+
 		/// <summary>
 		/// Initializes this instance.
 		/// </summary>
@@ -414,7 +461,7 @@ namespace NArrange.Core
 
 			_filesParsed = 0;
 			_filesWritten = 0;
-			_arrangeResults = new Dictionary<string, ArrangeResult>();
+			_arrangeResults = new Dictionary<string,ArrangeResult>();
 
 			try
 			{

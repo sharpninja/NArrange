@@ -1,7 +1,7 @@
 using System.Reflection;
 
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("NArrange")]
+[assembly: AssemblyCompany("Sharp Ninja")]
+[assembly: AssemblyProduct("NArrange (SharpNinja)")]
 [assembly: AssemblyCopyright("Copyright © 2007-2015 James Nies and NArrange contributors.")]
 
 // Version information for an assembly consists of the following four values:
@@ -13,5 +13,5 @@ using System.Reflection;
 //
 // You can specify all the values or you can default the Revision and Build Numbers
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("0.3.5")]
-[assembly: AssemblyFileVersion("0.3.5")]
+[assembly: AssemblyVersion("0.5.0")]
+[assembly: AssemblyFileVersion("0.5.0")]

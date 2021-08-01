@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("NArrange.Core")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription(".Net 5.0 Repackaging and exposing mwthods to allow execution on partial code.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
